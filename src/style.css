@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
  :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -22,10 +21,6 @@
 
 }
 
-* {
-  transition: all background-color 1.3s, 
-  color 1.3s;
-}
 
 .bg-tomato-500 { background-color: var(--tomato-500); }
 .bg-tomato-700 { background-color: var(--tomato-700); }
