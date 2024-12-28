@@ -1,7 +1,9 @@
 <template>
-    <div v-if="show" class="w-1/2 fixed top-2 right-0 text-center p-4 rounded-lg bg-tomato text-white shadow-lg">
+    <div v-if="show" class="fixed top-0  w-full text-center px-4 py-6 bg-tomato-800 text-white shadow-lg">
       {{ message }}
-      <span @click="clearMessage" class="float-right hover:shadow-lg cursor-pointer p-1 px-2">X</span>
+      <span @click="clearMessage" class="float-right hover:shadow-lg cursor-pointer grid place-items-center h-full ">
+        <span>X</span>
+      </span>
     </div>
 </template>
 
