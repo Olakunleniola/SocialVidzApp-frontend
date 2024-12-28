@@ -77,7 +77,7 @@
 <script>
   
   import Toast from "./components/Toast.vue";
-  import LoadingSpinner from "./components/LadingSpinner.vue";
+  import LoadingSpinner from "./components/LoadingSpinner.vue";
   import SuccessAnimation from "./components/SuccessAnimation.vue";
   import { ref } from 'vue';
   
