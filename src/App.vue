@@ -1,19 +1,22 @@
 <template>
-  <div :class="[{'light-mode': !darkMode},{'dark-mode:': darkMode},'min-h-screen' ,'flex' ,'flex-col']" >
+  <div id="content" class='bg-bgLight dark:bg-dark-bg min-h-screen flex flex-col font-poppins transition ease-in-out delay-150' :aria-mode="darkMode">
+    
     <!-- Header -->
-    <header class="px-6 py-4 shadow-md">
+    <header class="px-6 py-4 shadow-lg dark:bg-gradient-to-b dark:from-tomato-800 ">
       <div class="flex justify-between items-center max-w-[960px] mx-auto">
+
         <div class="flex items-center">
-          <img src="/Socialvidz_logo_alt.png" alt="Social Vidz Logo" class="md:w-10 w-8 h-auto mr-1">
+          <img src="/img/Socialvidz_logo_alt.png" alt="Social Vidz Logo" class="md:w-10 w-8 h-auto mr-1">
           <h1 id="logo-text" 
             class="md:text-xl lg:text-2xl text-lg font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-tomato-500 via-blue-500 to-green-500 drop-shadow-lg tracking-widest  font-ethnocentric">
             SocialVidz
           </h1>
         </div>
+
         <button 
           @click="toggleDarkMode" 
           id="themeToggle" 
-          class="flex justify-center items-center w-12 h-12 bg-dark dark:text-dark dark:bg-light drop-shadow-lg rounded-full hover:border-2 hover:border-tomato-500"
+          class="flex justify-center items-center w-12 h-12 bg-dark text-light dark:text-dark dark:bg-light drop-shadow-lg rounded-full hover:border-2 hover:border-tomato-500"
           aria-label="Toggle dark mode"
         >
           <svg 
@@ -40,7 +43,7 @@
             fill="none" 
             xmlns="http://www.w3.org/2000/svg"
             >
-            <title>Light Mode</title>
+            <title>toogle light mode</title>
             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
             <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
             <g id="SVGRepo_iconCarrier"> 
@@ -56,28 +59,33 @@
           </svg>
 
         </button>
+
       </div>
     </header>
 
     <!-- Main Content -->
     <main class="flex-grow container mt-3 mx-auto p-6 text-gray-700 dark:text-gray-400">
+      
+      <!-- Headers and Text Description -->
       <div class="text-center mb-8">
-        <h2 class="rainbow dark:reverse-rainbow text-4xl font-bold">Download Videos Seamlessly</h2>
+        <h2 class="text-tomato-700 dark:rainbow text-4xl font-bold font-montserrat">Download Videos Seamlessly</h2>
         <p class="md:text-xl font-extrabold mt-6 ">Download videos from your favorite platforms ✨</p>
       </div>
 
      <!-- Download Form -->
       <form v-on:submit.prevent class="p-6 max-w-xl mx-auto">
         <div class="mb-4 lg:text-lg text-md text-dark dark:text-gray-400">
-          <label for="videoURL" class="block font-lg font-bold font-ethnocentric">Video URL :</label>
+          <label for="videoURL" class="block font-lg font-bold font-montserrat">Video URL :</label>
           <div class="relative">
-            <input v-model="videoUrl" type="url" id="videoURL" placeholder="Paste video URL" class="placeholder:italic placeholder:text-slate-400 mt-1 block w-full p-5 rounded-md border border-4 border-tomato-800 shadow-xl focus:outline-none focus:ring-tomato-500 focus:ring-5 focus:border-tomato-500 dark:focus:border-tomato-500 dark:border-gray-700 dark:bg-gray-900 bg-gray-100 border broder-tomato-500" >
-            <span class="absolute inset-y-0 right-0 grid place-items-center w-[50px] cursor-pointer  my-1 mx-1 dark:bg-gray-800 bg-gray-100 shadow-2xl shadow-inner border-l-1">
-              <svg @click="handlePaste" v-if="!videoUrl" class="w-8 h-auto fill-slate-500 hover:fill-tomato-500 dark:hover:fill-tomato-500 transition-colors duration-300 ease-in-out"   fill="currentColor" width="800px" height="800px" viewBox="0 0 32 32" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:serif="http://www.serif.com/" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <!-- Input Field -->
+            <input v-model="videoUrl" type="url" id="videoURL" placeholder="Paste video URL" class="placeholder:italic placeholder:text-slate-400 mt-1 block w-full p-5 rounded-lg border-4 border-tomato-700 shadow-xl focus:outline-none focus:ring-tomato-500 focus:ring-5 focus:border-tomato-500 dark:focus:border-tomato-500 dark:bg-light bg-gray-100 broder-tomato-500" >
+            <!-- Paste and Clear Icon -->
+            <span class="absolute inset-y-0 right-0 grid place-items-center w-[50px] cursor-pointer my-1 mx-1 dark:bg-dark bg-light shadow-2xl shadow-inner border-l-1">
+              <svg @click="handlePaste" v-if="!videoUrl" class="w-8 h-auto fill-dark dark:fill-light hover:fill-tomato-500 dark:hover:fill-tomato-500 active:fill-dark dark:active:fill-light transition-colors duration-300 ease-in-out"   fill="currentColor" width="800px" height="800px" viewBox="0 0 32 32" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:serif="http://www.serif.com/" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>paste</title>
                 <path d="M10,1c-1.326,-0 -2.598,0.527 -3.536,1.464c-0.937,0.938 -1.464,2.21 -1.464,3.536c0,5.322 -0,14.678 0,20c-0,1.326 0.527,2.598 1.464,3.536c0.938,0.937 2.21,1.464 3.536,1.464c3.486,0 8.514,0 12,0c1.326,0 2.598,-0.527 3.536,-1.464c0.937,-0.938 1.464,-2.21 1.464,-3.536l-0,-20c0,-1.326 -0.527,-2.598 -1.464,-3.536c-0.938,-0.937 -2.21,-1.464 -3.536,-1.464l-0,3c0,1.326 -0.527,2.598 -1.464,3.536c-0.938,0.937 -2.21,1.464 -3.536,1.464l-2,-0c-1.326,0 -2.598,-0.527 -3.536,-1.464c-0.937,-0.938 -1.464,-2.21 -1.464,-3.536l0,-3Zm1,25l10,0c0.552,0 1,-0.448 1,-1c0,-0.552 -0.448,-1 -1,-1l-10,0c-0.552,0 -1,0.448 -1,1c0,0.552 0.448,1 1,1Zm0,-6l10,0c0.552,0 1,-0.448 1,-1c0,-0.552 -0.448,-1 -1,-1l-10,0c-0.552,0 -1,0.448 -1,1c0,0.552 0.448,1 1,1Zm0,-6l10,0c0.552,0 1,-0.448 1,-1c0,-0.552 -0.448,-1 -1,-1l-10,0c-0.552,0 -1,0.448 -1,1c0,0.552 0.448,1 1,1Zm9,-13l-0,3c0,0.796 -0.316,1.559 -0.879,2.121c-0.562,0.563 -1.325,0.879 -2.121,0.879l-2,0c-0.796,0 -1.559,-0.316 -2.121,-0.879c-0.563,-0.562 -0.879,-1.325 -0.879,-2.121l-0,-3l8,-0Z"/><g id="Icon"/>
               </svg>
-              <span v-else @click="handleClear" class="block hover:text-rose-500 drop-shadow-xl font-bold text-lg text-slate-500" title="clear">
+              <span v-else @click="handleClear" class="blocktext-dark dark:text-light  hover:text-rose-500 drop-shadow-xl font-bold text-lg" title="clear">
                 <svg class=" w-8 h-auto drop-shadow-lg" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg" aria-labelledby="cancelIconTitle" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" color="none">
                   <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title id="cancelIconTitle">Cancel</title> <path d="M15.5355339 15.5355339L8.46446609 8.46446609M15.5355339 8.46446609L8.46446609 15.5355339"></path> <path d="M4.92893219,19.0710678 C1.02368927,15.1658249 1.02368927,8.83417511 4.92893219,4.92893219 C8.83417511,1.02368927 15.1658249,1.02368927 19.0710678,4.92893219 C22.9763107,8.83417511 22.9763107,15.1658249 19.0710678,19.0710678 C15.1658249,22.9763107 8.83417511,22.9763107 4.92893219,19.0710678 Z"></path> </g>
                 </svg>
@@ -86,59 +94,70 @@
           </div>
         </div>  
 
+        <!-- Video Previews -->
+        <div v-show="videoInfo.title" class="font-montserrat mt-8 flex flex-col max-w-lg mx-auto h-auto bg-white dark:bg-gray-800 shadow-2xl rounded-lg overflow-hidden transform transition duration-300 hover:scale-105">
+          <iframe v-if="videoInfo.platform === 'youtube'" :src="embedUrl" frameborder="0" allowfullscreen class="w-full h-[250px] rounded-t-lg"></iframe>
+          <video v-else :src="videoInfo.url" autoplay class="w-full h-[250px] rounded-t-lg"></video>
+          <div class="p-4 bg-gradient-to-l from-tomato-500 via-tomato-800 to-red-900 ">
+            <h3 class="text-sm text-light font-bold">Video Title: <span class="font-poppins font-aleo text-gray-200 italics">{{ videoInfo.title }}</span></h3>
+            <p class="text-sm text-light mt-3 font-bold">Platform: <span class="font-poppins text-gray-200 capitalize"> {{ videoInfo.platform }} </span></p>
+            <p class="text-sm text-light mt-3 font-bold">Video Size: <span class="font-poppins text-gray-200 capitalize"> {{ (videoInfo.size/1000000).toFixed("2") }} MB </span></p>
+          </div>
+        </div>
+
+        <!-- Download Button -->
         <button
           v-show="videoInfo.title"
           @click="handleDownload"
-          :disabled="isLoading"
+          :disabled="isDownloading"
+          id="download"
           type="button"
-          class="w-full md:block md:mx-auto md:max-w-[50%] p-4 text-white font-extrabold font-ethnocentric rounded-md bg-gradient-to-r from-tomato-500 to-red-900 hover:bg-gradient-to-l hover:from-red-500 hover:to-tomato-800  active:bg-gradient-to-r active:from-white active:to-tomato-700 transition duration-300 ease-in-out shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed dark:hover:from-tomato-800 dark:hover:to-dark"
+          class="mt-8 w-full md:block md:mx-auto md:max-w-[50%] p-4 text-tomato-700 dark:text-light bg-light dark:bg-transparent font-bold font-ethnocentric rounded-md overflow-hidden hover:bg-transparent hover:text-light border-4 border-tomato-700  hover:border-tomato-500 dark:border-light dark:hover:border-tomato-500 active:bg-gradient-to-r active:from-tomato-800 active:to-dark active:border-tomato-700 dark:active:border-tomato-700 transition duration-100 ease-in-out shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed relative"
         >
           Download
         </button>
       </form>
 
-      <!-- Video Previews -->
-        <div v-show="videoInfo.title" class="mt-8 flex flex-col max-w-lg mx-auto h-auto bg-white dark:bg-gray-800 shadow-2xl rounded-lg overflow-hidden transform transition duration-300 hover:scale-105">
-          <iframe v-if="videoInfo.platform === 'youtube'" :src="embedUrl" frameborder="0" allowfullscreen class="w-full h-[250px] rounded-t-lg"></iframe>
-          <video v-else :src="videoInfo.url" class="w-full h-[250px] rounded-t-lg"></video>
-          <div class="p-4 bg-gradient-to-l from-tomato-500 via-tomato-800 to-red-900 ">
-            <h3 class="text-sm text-light font-bold  font-ethnocentric">Video Title: <span class="font-aleo text-gray-200 italics">{{ videoInfo.title }}</span></h3>
-            <p class="text-sm font-ethnocentric text-light mt-3">Platform: <span class="font-aleo text-gray-200 capitalize"> {{ videoInfo.platform }} </span></p>
-          </div>
-        </div>
-
     </main>
 
     <!-- Footer -->
-    <footer class="shadow-lg py-4 text-center text-gray-700 dark:text-gray-400">
+    <footer class="shadow-lg py-4 text-center text-gray-700 dark:text-gray-400 dark:bg-gradient-to-t dark:from-tomato-800">
       <p>&copy; 2024 Social Vidz. All rights reserved.</p>
-      <a href="" class="text-blue-800 dark:text-blue-300 dark:hover:text-tomato-600 hover:text-tomato-600">Terms of Use</a>
+      <a href="" class="relative text-blue-500 dark:text-blue-400 dark:hover:text-light hover:text-tomato-600">Terms of Use</a>
     </footer>
 
     <!-- Components -->
     <Transition name="slide">
       <Toast v-if="errorMessage" v-model:message="errorMessage" />
     </Transition>
-    <LoadingSpinner v-if="isLoading" />
-    <SuccessAnimation v-if="isSuccess" />
+    <LoadingSpinner v-if="isLoading"/>
+    <DownloadAnimation 
+      v-if="isDownloading" 
+      :progress="downloadProgress"
+      @cancel="handleCancelDownload"  
+    />
+    <PreloadAnimation v-if="preloading" />
   
   </div>
 </template>
 
 
 <script>
-  
+
   import Toast from "./components/Toast.vue";
   import LoadingSpinner from "./components/LoadingSpinner.vue";
-  import SuccessAnimation from "./components/SuccessAnimation.vue";
+  import DownloadAnimation from "./components/DownloadAnimation.vue";
+  import PreloadAnimation from "./components/PreloadAnimation.vue";
   import { ref } from 'vue';
-  import axios from 'axios';
+ 
   
   export default {
+
     components: {
       Toast,
       LoadingSpinner,
-      SuccessAnimation,
+      DownloadAnimation,
+      PreloadAnimation,
     },
 
     setup(){
@@ -149,87 +168,120 @@
     data() {
 
       return {
+        preloading: true,
         videoUrl: "",
         isLoading: false,
-        isSuccess: false,
+        isDownloading: false,
         darkMode: false,
         platform: "",
         videoInfo: {},
+        downloadProgress: 0,
       };
     },
 
     methods: {
+
       async handleDownload(e) {
-        e.preventDefault()
+        e.preventDefault();
+
         if (!this.videoUrl.trim()) {
           this.errorMessage = "Please enter a valid URL!";
           return;
         }
 
-        this.isLoading = true
+        this.isDownloading = true;
+        this.downloadProgress = 0;
+        this.abortController = new AbortController();
+        const signal = this.abortController.signal;
 
-        try{
-          const response = await axios.post(
-            "http://127.0.0.1:8000/social_vidz/api/download", 
-            {
-              url: this.videoInfo.url.trim(),
-              platform: this.videoInfo.platform
+        try {
+          // Start the fetch request for downloading the video
+          const response = await fetch("http://127.0.0.1:8000/social_vidz/api/download", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
             },
-            {responseType: "blob"}
-          )
+            body: JSON.stringify({
+              url: this.videoInfo.url.trim(),
+              platform: this.videoInfo.platform,
+              size: this.videoInfo.size, // Send the size if you know it, otherwise you can handle this in the server
+            }),
+            signal
+          });
 
-          if(!response.status === 200) {
-            throw new Error(response.data.data.detail)
+          if (!response.ok) {
+            throw new Error(`Failed to download. Status: ${response.status}`);
           }
 
-          console.log(response.data)
+          // Get the Content-Length header if available for progress tracking
+          const contentLength = response.headers.get('Content-Length');
+          const reader = response.body.getReader(); // Read the response as a stream
+          const totalSize = contentLength ? parseInt(contentLength, 10) : 0; // Total file size i
+          let recievedLength = 0; // Tracks the loaded bytes
+          const chunks = []; // To store the chunks of data
 
-          const blob = new Blob([response.data], {type: "video/mp4"})
-          const downloadLink = document.createElement("a");
-          const sanitizedTitle = this.videoInfo.title.trim().replace(/\s+/g, "_").substr(0, 15);
-          downloadLink.download = `${sanitizedTitle || "video"}.mp4`;
-          downloadLink.href = URL.createObjectURL(blob);
-          document.body.appendChild(downloadLink);
-          downloadLink.click();
+          const processChunk = ({done, value}) => {
+            if(done){
+              this.downloadProgress = 100;
+              const blob = new Blob(chunks);
+              const downloadLink = document.createElement('a');
+              const sanitizedTitle = this.videoInfo.title.trim().replace(/\s+/g, "_").substr(0, 15);
+              downloadLink.download = `${sanitizedTitle || "video"}.mp4`;
+              downloadLink.href = URL.createObjectURL(blob);
+              document.body.appendChild(downloadLink);
+              downloadLink.click(); // Trigger the download
+              URL.revokeObjectURL(downloadLink);
+              document.body.removeChild(downloadLink);
+              this.handleClear(); // Reset or clean up any state
+              this.isLoading = false
+              this.isSuccess = true;
+              return;
+            }
+    
+            chunks.push(value);
+            recievedLength +=value.length;
+            const progress = (recievedLength/ totalSize) * 100;
+            this.downloadProgress = Math.floor(progress)
+            console.log(this.downloadProgress)
+            reader.read().then(processChunk)
+          }
 
-          // Clean up
-          document.body.removeChild(downloadLink);
-          URL.revokeObjectURL(downloadLink.href);
-          this.handleClear()
-          this.isSuccess = true;
-
-
-        }catch (err) {
+          reader.read().then(processChunk)
+         
+        } catch (err) {
           console.error("Download error:", err);
           this.errorMessage = "Failed to download video.";
-        }finally {
           this.isLoading = false
-        }       
+        }
       },
 
       toggleDarkMode() {
         this.darkMode = !this.darkMode
+        localStorage.setItem('darkmode', this.darkMode)
         document.documentElement.classList.toggle("dark", this.darkMode)
       },
 
       async getVideoInfo(url) {
-        this.isLoading = true
+        this.isLoading = true;
         try {
-          const response = await axios(`http://127.0.0.1:8000/social_vidz/api/get_info?url=${url}`);  
-          if (!response.status === 200){
-            console.error(response.data.data || "cdsdvdsdssddssv")
-            throw new Error(response.data.data.detail)
+          const response = await fetch(`http://127.0.0.1:8000/social_vidz/api/get_info?url=${url}`);  
+          if (!response.ok){
+            const errorText = await response.json();
+            throw new Error(errorText.detail);
           }
-          this.videoInfo = await response.data.data
-          console.log(this.videoInfo)
-          console.log(this.videoInfo.url)
-          this.platform = this.videoInfo.platform
+          const data = await response.json();
+          this.videoInfo = data.data;
+          this.platform = this.videoInfo.platform;
         }catch(err) {
-          console.log(err.response.data.detail)
-          // console.error( err.response || err)
-          this.errorMessage = err.response.data.detail || err
+         // Handle network errors
+          if (err.message.toLowerCase().includes('failed')) {
+            this.errorMessage = 'Network error. Please check your internet connection.';
+          } else {
+            this.errorMessage = err.message;
+          }
+          this.handleClear();
         }finally {
-          this.isLoading = false
+          this.isLoading = false;
         }
       },
 
@@ -257,8 +309,37 @@
       handleClear() {
         this.videoInfo = {};
         this.videoUrl = "";
-      }
-      
+        setTimeout(() => {
+          this.downloadProgress = 0;
+          this.isDownloading = false
+        }, 5000);
+      },
+
+      handleCancelDownload() {
+        if(this.abortController){
+          this.isDownloading = false
+          this.abortController.abort()
+          this.handleClear()
+          this.errorMessage = "Download canceled by User"
+        }
+      },
+
+      preloadAssets() {
+        const font = new FontFace("Ethnocentric", "url(/fonts/ethnocentric-rg.ttf)");
+        document.fonts.add(font);
+
+        const imageUrls = ["/img/background.png", "/img/Socialvidz_logo_alt.png"];
+        const promises = imageUrls.map((src) => {
+          return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.src = src;
+            img.onload = resolve;
+            img.onerror = reject;
+          });
+        });
+
+        return Promise.all([font.load(), ...promises]);
+      },
     },
 
     watch: {
@@ -283,7 +364,27 @@
         const videoId = this.extractVideoId()
         return videoId ? `https://www.youtube.com/embed/${videoId}` : ""
       }
-    }
+    },
+
+    async mounted(){
+      const isDark = localStorage.getItem('darkmode');
+      console.log(isDark)
+      if(isDark === 'true' ){
+        this.darkMode = true;
+        document.documentElement.classList.toggle("dark", this.darkMode);
+      };
+      try{
+        // Max 10 seconds
+        const timeout = new Promise((resolve) => setTimeout(resolve, 10000)); 
+        // Preload logic from the earlier example
+        const preload = this.preloadAssets();
+        // Whichever completes first
+        await Promise.race([timeout, preload]); 
+        this.preloading = false;
+      }catch(error){
+        console.log(error)
+      }
+    },
 
   };
 
