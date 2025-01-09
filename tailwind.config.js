@@ -23,6 +23,7 @@ export default {
       
       backgroundImage: {
         'bgLight': "linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url('/img/background.png')",
+        'dark-bg': "linear-gradient( #121212,  #121212)"
       },
 
       fontFamily: {
