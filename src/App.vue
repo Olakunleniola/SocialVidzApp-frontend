@@ -176,6 +176,7 @@
         platform: "",
         videoInfo: {},
         downloadProgress: 0,
+        apiUrl: import.meta.env.VITE_API_URL,
       };
     },
 
@@ -196,7 +197,7 @@
 
         try {
           // Start the fetch request for downloading the video
-          const response = await fetch("http://127.0.0.1:8000/social_vidz/api/download", {
+          const response = await fetch(`${this.apiUrl}/social_vidz/api/download`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -210,7 +211,8 @@
           });
 
           if (!response.ok) {
-            throw new Error(`Failed to download. Status: ${response.status}`);
+            const error = await response.json() 
+            throw new Error(`Failed to download: ${error.detail}`);
           }
 
           // Get the Content-Length header if available for progress tracking
@@ -264,7 +266,7 @@
       async getVideoInfo(url) {
         this.isLoading = true;
         try {
-          const response = await fetch(`http://127.0.0.1:8000/social_vidz/api/get_info?url=${url}`);  
+          const response = await fetch(`${this.apiUrl}/social_vidz/api/get_info?url=${url}`);  
           if (!response.ok){
             const errorText = await response.json();
             throw new Error(errorText.detail);
