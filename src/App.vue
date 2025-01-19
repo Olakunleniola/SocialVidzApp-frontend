@@ -243,7 +243,6 @@
             recievedLength +=value.length;
             const progress = (recievedLength/ totalSize) * 100;
             this.downloadProgress = Math.floor(progress)
-            console.log(this.downloadProgress)
             reader.read().then(processChunk)
           }
 
