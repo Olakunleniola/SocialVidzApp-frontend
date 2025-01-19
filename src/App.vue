@@ -175,7 +175,7 @@
         platform: "",
         videoInfo: {},
         downloadProgress: 0,
-        apiUrl: import.meta.env.VITE_API_URL,
+        apiUrl: import.meta.env.VITE_API_URL || "",
       };
     },
 
@@ -203,8 +203,8 @@
             },
             body: JSON.stringify({
               url: this.videoInfo.url.trim(),
-              platform: this.videoInfo.platform,
-              size: this.videoInfo.size, // Send the size if you know it, otherwise you can handle this in the server
+              platform: this.videoInfo.platform.trim(),
+              title: this.videoInfo.title.trim() // Send the size if you know it, otherwise you can handle this in the server
             }),
             signal
           });
@@ -265,7 +265,7 @@
       async getVideoInfo(url) {
         this.isLoading = true;
         try {
-          const response = await fetch(`${this.apiUrl}/social_vidz/api/get_info?url=${url}`);  
+          const response = await fetch(`${this.apiUrl}/social_vidz/api/info?url=${url}`);  
           if (!response.ok){
             const errorText = await response.json();
             throw new Error(errorText.detail);
@@ -288,14 +288,18 @@
 
       async handlePaste(e) {
         e.preventDefault()
-        try{
-          if (navigator.clipboard && navigator.clipboard.readText){
-            const text = await navigator.clipboard.readText()
-            this.videoUrl = text; 
+        try {
+
+          const permissionStatus = await navigator.permissions.query({ name: 'clipboard-read' });
+
+          if (permissionStatus.state === 'denied') {
+            alert('Permission to access clipboard was denied.');
+            return;
           }
-          else {
-            alert("Pasting not supported in Browser")
-          }
+
+          const text = await navigator.clipboard.readText()
+          this.videoUrl = text; 
+
         } catch(err) {
           console.error("Falied to read the text", err)
           this.errorMessage = "Invalid Video Url"
@@ -369,7 +373,6 @@
 
     async mounted(){
       const isDark = localStorage.getItem('darkmode');
-      console.log(isDark)
       if(isDark === 'true' ){
         this.darkMode = true;
         document.documentElement.classList.toggle("dark", this.darkMode);
