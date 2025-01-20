@@ -234,8 +234,6 @@
               URL.revokeObjectURL(downloadLink);
               document.body.removeChild(downloadLink);
               this.handleClear(); // Reset or clean up any state
-              this.isLoading = false
-              this.isSuccess = true;
               return;
             }
     
@@ -243,7 +241,6 @@
             recievedLength +=value.length;
             const progress = (recievedLength/ totalSize) * 100;
             this.downloadProgress = Math.floor(progress)
-            console.log(this.downloadProgress)
             reader.read().then(processChunk)
           }
 
@@ -252,7 +249,7 @@
         } catch (err) {
           console.error("Download error:", err);
           this.errorMessage = "Failed to download video.";
-          this.isLoading = false
+          this.isDownloading = false
         }
       },
 
